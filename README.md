@@ -4,11 +4,9 @@
 
 <img src="header_divider.gif" width="100%">
 
-<img src="header.png">
+<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs_webp/a5b9b917538755.562bb5113add3.jpg">
 
-<p align="center">
-<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjdjZGt2NWE3NDk5d3lxd3dkeDhjY3F6ZTU4ankzOW03YjA5ZWduNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRzozg4TCBXv6QU/giphy.gif" width="50%" >
-</p>
+
 
 # <b>Hi there, I'm </b><a href="https://github.com/soul-abhi">Abhishek Kumar</a> <img src="waving.gif" width="30">
 
