@@ -1,75 +1,100 @@
-<h1 align="center">Hi 👋, I'm Abhishek Kumar</h1>
-<h3 align="center">A passionate frontend developer from India</h3>
+<img src="header_divider.gif" width="100%">
+<img src="header.png">
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=abhishek-kiet&label=Profile%20views&color=0e75b6&style=flat&value=1000" alt="abhishek-kiet" /> </p>
+<p align="center">
+<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjdjZGt2NWE3NDk5d3lxd3dkeDhjY3F6ZTU4ankzOW03YjA5ZWduNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRzozg4TCBXv6QU/giphy.gif" width="50%" >
+</p>
 
-- 🔭 I’m currently working on **CODE ALPHA PROJECT**
+# <b>Hi there, I'm </b><a href="https://github.com/soul-abhi">Abhishek Kumar</a> <img src="waving.gif" width="30">
 
-- 🌱 I’m currently learning **OCI(Oracle Cloud Infrastructure)**
+<img src="about_me.gif" width="35">&nbsp;**_About Me_**
+<img src="line_break.gif">
 
-- 💬 Ask me about **HCJ , Web Developement , Figma , DBMS**
+<p style="font-size: 1.25rem;">
+I am a <b>dedicated Web Developer</b> who believes that real mastery of code comes from building in public and sharing knowledge. As an active <b>open-source contributor</b>, I value collaboration and community-driven problem solving. I primarily work with <img style="position : relative ; top : 4px;" src = "https://www.svgrepo.com/show/373921/ng-tailwind.svg" width = "32px" height = "22px"> <b>Tailwind</b> and <img style="position : relative ; top : 4px;" src = "https://www.svgrepo.com/show/374337/js-opened.svg" width = "32px" height = "22px"><b>JavaScript</b> to create scalable and meaningful solutions.
+</p>
 
-- 📫 How to reach me **iamabhisheksingh28@gmail.com**
+<img src="script_sticker.gif" width="30">&nbsp;**_Stack I used_**
+<img src="line_break.gif">
 
+### Languages I Use
 
-## 🌐 Socials:
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/tezas.thakur) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/soul-bot) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:abhishek.2428cse1292@kiet.edu) 
+<table align="center">
+    <tr>
+        <!-- <td align="center" width="90"><img height="55" src="c.svg" width="55"><br>C</td> -->
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/452234/java.svg" width="55"></path></g>
+</svg><br>Java</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/374337/js-opened.svg" width="55"><br>JavaScript</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/294241/python.svg" width="55"><br>Python</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/226137/php.svg" width="55"><br>PHP</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/249553/browser-video-player.svg" width="55"><br>HTML5</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/293189/css.svg" width="55"><br>CSS3</td>
+    </tr>
+</table>
 
-## 💻 Tech Stack:
+### Frameworks & Libraries I'm Comfortable With
 
-### 👨‍💻 Languages I Use
-![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+<table align="center">
+    <tr>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/354264/react-styleguidist.svg" width="55"><br>React</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/353498/bootstrap.svg" width="55"><br>Bootstrap</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/373921/ng-tailwind.svg" width="55"><br>TailwindCSS</td>
+        <td align="center" width="90"><img height="55" style="background-color : #84aa98; border-radius : 12px; width : 72px ; position : relative ; top : 5px;" src="https://www.svgrepo.com/show/354570/wordpress.svg" width="55"><br>WordPress</td>
+    </tr>
+</table>
 
----
+### Tools & Platforms I Use
 
-### 📚 Frameworks & Libraries I'm Comfortable With
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![WordPress](https://img.shields.io/badge/WordPress-%23117AC9.svg?style=for-the-badge&logo=WordPress&logoColor=white)
+<table align="center">
+    <tr>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/373401/vscode3-opened.svg" width="55"><br>VS Code</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/376339/netlify.svg" width="55"><br>Netlify</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/303251/mysql-logo.svg" width="55"><br>MySQL</td>
+        <td align="center" width="90"><img style = "background-color : red;color:red; border-radius : 14px; position : relative; top : 5px;" height="55" src="https://www.svgrepo.com/show/516636/git.svg " width="55"><br>Git</td>
+        <td align="center" width="90"><img style = "filter : invert(1); stroke : black ;" height="55" src="https://www.svgrepo.com/show/500874/github.svg" width="55"><br>GitHub</td>
+    </tr>
+</table>
 
----
+### Design & Multimedia
 
-### 🛠 Tools & Platforms I Use
-![VS Code](https://img.shields.io/badge/VS%20Code-%23007ACC.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
-![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+<table align="center">
+    <tr>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/452148/adobe-creative-cloud.svg" width="55"><br>Adobe</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/448222/figma.svg" width="55"><br>Figma</td>
+        <td align="center" width="90"><img style= "background-color : white ; border-radius : 50%;" height="55" src="https://www.svgrepo.com/show/305835/canva.svg" width="55"><br>Canva</td>
+    </tr>
+</table>
 
----
+### Others
 
-### 🎨 Design & Multimedia
-![Adobe](https://img.shields.io/badge/adobe-%23FF0000.svg?style=for-the-badge&logo=adobe&logoColor=white)
-![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
-![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white)
+<table align="center">
+    <tr>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/354118/nodejs.svg" width="55"><br>Node.js</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/177123/steam-social-media.svg" width="55"><br>Steam</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/331381/epic-games.svg" width="55"><br>Epic Games</td>
+        <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/452137/xbox.svg" width="55"><br>Xbox</td>
+    </tr>
+</table>
 
----
+<img src="stats_logo.gif" width="35">&nbsp;**_Github Stats_**
+<img src="line_break.gif">
 
-### 🧪 Others
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![Steam](https://img.shields.io/badge/steam-%23000000.svg?style=for-the-badge&logo=steam&logoColor=white)
-![Epic Games](https://img.shields.io/badge/epicgames-%23313131.svg?style=for-the-badge&logo=epicgames&logoColor=white)
-![Xbox](https://img.shields.io/badge/xbox-%23107C10.svg?style=for-the-badge&logo=xbox&logoColor=white)
-
----
-## 🌟 Portfolio
-<a href="https://soul-abhi.netlify.app/">
-  <img src="https://img.shields.io/badge/Visit-My%20Portfolio-blue?style=for-the-badge&logo=vercel&logoColor=white" />
-</a>
-
----
-
-### ✍️ Random Dev Quote
-![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
-
----
-[![](https://visitcount.itsvg.in/api?id=abhishek-kiet&icon=0&color=0)](https://visitcount.itsvg.in)
-
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
+<div>
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=soul-abhi&layout=compact&show_icons=true&theme=tokyonight" alt="soul-abhi github-readme-stats" width="48%" />
+  <img align="center" src="https://github-readme-streak-stats-eight.vercel.app/?user=soul-abhi&theme=tokyonight" width="68%" />
+</div>
+<br />
+<div>
+    <img src="https://github-contributor-stats.vercel.app/api?username=soul-abhi&limit=4&theme=one_dark_pro&combine_all_yearly_contributions=true" width="68%" />
+</div>
+<br />
+<div>
+  <img align="center" src="https://github-readme-activity-graph.vercel.app/graph?username=soul-abhi&theme=merko" alt="soul-abhi github readme activity graph" width="100%" />
+</div>
+<br>
+<p align="center">
+  <a href="https://holopin.io/@soul-abhi">
+    <img src="https://holopin.me/soul-abhi" alt="Holopin Badges" />
+  </a>
+</p>
+<img src="header_divider.gif" width="100%">
