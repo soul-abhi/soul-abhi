@@ -1,4 +1,4 @@
-<img src="header.png">
+<img src="detbot.png">
 
 
 <img src="header_divider.gif" width="100%">
