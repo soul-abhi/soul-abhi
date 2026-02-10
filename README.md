@@ -77,7 +77,7 @@ I am a <b>dedicated Web Developer</b> who believes that real mastery of code com
     </tr>
 </table>
 
-<img src="stats_logo.gif" width="35">&nbsp;**_Github Stats_**
+<img src="https://www.freepik.com/free-vector/creative-gradient-code-logo_12064006.htm#fromView=keyword&page=1&position=0&uuid=66eee6a5-768e-41a9-9879-27ef645268c1&query=Dev+logo" width="35">&nbsp;**_Github Stats_**
 <img src="line_break.gif">
 
 <div>
