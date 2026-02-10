@@ -85,7 +85,7 @@ I am a <b>dedicated Web Developer</b> who believes that real mastery of code com
   <img align="center" src="https://github-readme-streak-stats-eight.vercel.app/?user=soul-abhi&theme=tokyonight" width="68%" />
 </div>
 <br />
-<div>
+<div style = "display : flex; align-item: center;">
     <img src="https://github-contributor-stats.vercel.app/api?username=soul-abhi&limit=4&theme=one_dark_pro&combine_all_yearly_contributions=true" width="68%" />
 </div>
 <br />
