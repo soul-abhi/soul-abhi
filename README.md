@@ -94,8 +94,8 @@ I am a <b>dedicated Web Developer</b> who believes that real mastery of code com
 </div>
 <br>
 <p align="center">
-  <a href="https://holopin.io/@soul-abhi">
-    <img src="https://holopin.me/soul-abhi" alt="Holopin Badges" />
+  <a href="https://holopin.io/@soulabhi">
+    <img src="https://holopin.me/soulabhi" alt="Holopin Badges" />
   </a>
 </p>
 <img src="header_divider.gif" width="100%">
