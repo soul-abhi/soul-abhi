@@ -1,9 +1,10 @@
-<img src="header_divider.gif" width="100%">
-<img src="header.png">
+<img src="detbot.png">
 
-<p align="center">
-<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjdjZGt2NWE3NDk5d3lxd3dkeDhjY3F6ZTU4ankzOW03YjA5ZWduNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26BRzozg4TCBXv6QU/giphy.gif" width="50%" >
-</p>
+
+<img src="header_divider.gif" width="100%">
+
+
+
 
 # <b>Hi there, I'm </b><a href="https://github.com/soul-abhi">Abhishek Kumar</a> <img src="waving.gif" width="30">
 
@@ -50,7 +51,7 @@ I am a <b>dedicated Web Developer</b> who believes that real mastery of code com
         <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/373401/vscode3-opened.svg" width="55"><br>VS Code</td>
         <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/376339/netlify.svg" width="55"><br>Netlify</td>
         <td align="center" width="90"><img height="55" src="https://www.svgrepo.com/show/303251/mysql-logo.svg" width="55"><br>MySQL</td>
-        <td align="center" width="90"><img style = "background-color : red;color:red; border-radius : 14px; position : relative; top : 5px;" height="55" src="https://www.svgrepo.com/show/516636/git.svg " width="55"><br>Git</td>
+        <td align="center" width="90"><img style = "background-color : red;color:red; border-radius : 14px; position : relative; top : 5px;" height="55" src="https://git-scm.com/images/logos/logomark-white@2x.png" width="55"><br>Git</td>
         <td align="center" width="90"><img style = "filter : invert(1); stroke : black ;" height="55" src="https://www.svgrepo.com/show/500874/github.svg" width="55"><br>GitHub</td>
     </tr>
 </table>
@@ -93,8 +94,8 @@ I am a <b>dedicated Web Developer</b> who believes that real mastery of code com
 </div>
 <br>
 <p align="center">
-  <a href="https://holopin.io/@soul-abhi">
-    <img src="https://holopin.me/soul-abhi" alt="Holopin Badges" />
+  <a href="https://holopin.io/@soulabhi">
+    <img src="https://holopin.me/soulabhi" alt="Holopin Badges" />
   </a>
 </p>
 <img src="header_divider.gif" width="100%">
