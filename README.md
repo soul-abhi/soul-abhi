@@ -81,7 +81,7 @@ I am a <b>dedicated Web Developer</b> who believes that real mastery of code com
 <img src="line_break.gif">
 
 <div>
-  <img align="center" src="https://i.pinimg.com/736x/29/86/94/298694409e09117f6bbcbf0cc9a5ae6c.jpg" alt="soul-abhi github-readme-stats" width="48%" />
+  <img align="center" src="https://i.pinimg.com/736x/29/86/94/298694409e09117f6bbcbf0cc9a5ae6c.jpg" style="width : 300px; height : 100px; float : left;" alt="soul-abhi github-readme-stats" width="48%" />
   <img align="center" src="https://github-readme-streak-stats-eight.vercel.app/?user=soul-abhi&theme=tokyonight" width="68%" />
 </div>
 <br />
