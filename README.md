@@ -18,6 +18,17 @@ I am a <b>dedicated Web Developer</b> who believes that real mastery of code com
 <img src="script_sticker.gif" width="30">&nbsp;**_Stack I used_**
 <img src="line_break.gif">
 
+---
+
+
+### 📈 Productivity Chart
+
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=ethical-buddy&theme=tokyo-night&area=true&hide_border=true" width="100%">
+</p>
+
+---
+
 ### Languages I Use
 
 <table align="center">
