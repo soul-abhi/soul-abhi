@@ -98,9 +98,7 @@ I am a <b>dedicated Web Developer</b> who believes that real mastery of code com
 <br />
 
 <br />
-<div>
-  <img align="center" src="https://github-readme-activity-graph.vercel.app/graph?username=soul-abhi&theme=merko" alt="soul-abhi github readme activity graph" width="100%" />
-</div>
+
 <br>
 <p align="center">
   <a href="https://holopin.io/@soulabhi">
