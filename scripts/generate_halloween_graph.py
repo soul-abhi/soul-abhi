@@ -117,7 +117,13 @@ def fetch_weeks(username: str, token: str):
     payload = resp.json()
     if "errors" in payload:
         raise RuntimeError(f"GitHub API error: {payload['errors']}")
-    cal = payload["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+    user = (payload.get("data") or {}).get("user")
+    if not user:
+        raise RuntimeError(
+            f"User '{username}' not found or not readable with the provided token "
+            "(the default GITHUB_TOKEN can only read public contributions)."
+        )
+    cal = user["contributionsCollection"]["contributionCalendar"]
     return cal["weeks"], cal["totalContributions"]
 
 
