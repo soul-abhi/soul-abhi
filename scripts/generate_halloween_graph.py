@@ -303,14 +303,15 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
 
     # ── total (bottom-right) with a little pumpkin ─────────────────────
     total_text = f"{total:,} contributions in {year}"
-    # Rough width estimate so the pumpkin sits just left of the text.
-    text_w = len(total_text) * 6.2
     tx = svg_w - PAD_R
     a(f'<text x="{tx}" y="{legend_baseline}" fill="{ACCENT}" '
       f'font-family="{FONT}" font-size="11" font-weight="600" text-anchor="end">'
       f'{total_text}</text>')
 
-    pxi = tx - text_w - 14
+    # Conservative glyph-width estimate (bold 11px, ~5.4px/char) so the
+    # pumpkin sits just left of the number with a small, consistent gap.
+    text_w = len(total_text) * 5.4
+    pxi = max(PAD_L, tx - text_w - 10)
     a(f'<g transform="translate({pxi},{legend_baseline-4})"><g class="p">')
     a(f'<circle r="5.4" fill="{ACCENT}" opacity="0.95"/>')
     a(f'<path d="M0,-5.4 q1.2,-2 2.6,-1.4" stroke="#2e7d32" '
