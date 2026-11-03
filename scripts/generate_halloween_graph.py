@@ -160,6 +160,20 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
         d["contributionCount"] for wk in weeks for d in wk["contributionDays"]
     )
 
+    # Days with the most contributions get a jack-o'-lantern.
+    # Pick the top ~10% of active days (min 4, max 40) so it always looks good.
+    active_days = sorted(
+        (
+            (d["contributionCount"], d["date"])
+            for wk in weeks
+            for d in wk["contributionDays"]
+            if d["contributionCount"] > 0
+        ),
+        reverse=True,
+    )
+    k = min(40, max(4, len(active_days) // 10)) if active_days else 0
+    pumpkin_dates = {date for _, date in active_days[:k]}
+
     out = []
     a = out.append
 
@@ -177,9 +191,20 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
     a('@keyframes breathe {0%,100%{opacity:1}50%{opacity:.55}}')
     a('@keyframes drift {0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}')
     a('@keyframes twinkle {0%,100%{opacity:.15}50%{opacity:.7}}')
+    a('@keyframes pop {0%{transform:scale(0) rotate(-25deg);opacity:0}'
+      '55%{transform:scale(1.28) rotate(10deg);opacity:1}'
+      '75%{transform:scale(.9) rotate(-4deg)}'
+      '100%{transform:scale(1) rotate(0)}')
+    a('@keyframes bob {0%,100%{transform:translateY(0)}50%{transform:translateY(-1.4px)}}')
+    a('@keyframes flicker {0%,100%{opacity:.9}50%{opacity:1}}')
     a('.c{animation:breathe 2.8s ease-in-out infinite}')
     a('.p{animation:drift 3.2s ease-in-out infinite}')
     a('.s{animation:twinkle 4s ease-in-out infinite}')
+    a('.pop{animation:pop .75s cubic-bezier(.34,1.56,.64,1) both;'
+      'transform-box:fill-box;transform-origin:center}')
+    a('.bob{animation:bob 2.4s ease-in-out infinite;'
+      'transform-box:fill-box;transform-origin:center}')
+    a('.fl{animation:flicker 1.8s ease-in-out infinite}')
     a(']]></style>')
     a('</defs>')
 
@@ -208,6 +233,7 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
 
     # ── cells ──────────────────────────────────────────────────────────
     order = 0
+    pump_order = 0
     for wi, wk in enumerate(weeks):
         for di, day in enumerate(wk["contributionDays"]):
             count = day["contributionCount"]
@@ -220,9 +246,47 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
                   f'rx="{RADIUS}" fill="{LEVELS[0]}"/>')
                 continue
 
+            glow = ' filter="url(#glow)"' if lvl >= 3 else ''
+
+            # ── High-contribution day → jack-o'-lantern that pops in ──
+            if day["date"] in pumpkin_dates:
+                a(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="{RADIUS}" '
+                  f'fill="{LEVELS[4]}" filter="url(#glow)"/>')
+
+                cx = x + CELL / 2
+                cy = y + CELL / 2
+                s = round(CELL * 1.12 / 24, 4)
+                pop_delay = round(0.15 + (pump_order * 0.06) % 1.9, 2)
+                pump_order += 1
+
+                a(f'<g transform="translate({cx},{cy})">')
+                a(f'<g class="pop" style="animation-delay:{pop_delay}s">')
+                a(f'<g class="bob" style="animation-delay:{round(pop_delay + 0.75, 2)}s">')
+                a(f'<g class="fl" transform="scale({s}) translate(-12,-12)">')
+                a(f'<title>{count} contributions on {day["date"]} 🎃</title>')
+                a('<circle cx="12" cy="13.5" r="11" fill="#ff6a00" opacity="0.22"/>')
+                a('<ellipse cx="12" cy="13.6" rx="9.2" ry="8.4" fill="#ff7a10"/>')
+                a('<path d="M7.4 6.8 Q5 13.6 7.4 20.4" stroke="#c74a00" '
+                  'stroke-width="1.1" fill="none" opacity=".8"/>')
+                a('<path d="M16.6 6.8 Q19 13.6 16.6 20.4" stroke="#c74a00" '
+                  'stroke-width="1.1" fill="none" opacity=".8"/>')
+                a('<path d="M12 5.2 Q12 13.6 12 22" stroke="#c74a00" '
+                  'stroke-width="1" fill="none" opacity=".55"/>')
+                a('<path d="M11.2 5.6 q0.2 -2.2 2.3 -2.6" stroke="#3f8f3a" '
+                  'stroke-width="1.8" fill="none" stroke-linecap="round"/>')
+                a('<path d="M7.4 12.3 L10.6 9.9 L10.9 13.4 Z" fill="#1a0a00"/>')
+                a('<path d="M16.6 12.3 L13.4 9.9 L13.1 13.4 Z" fill="#1a0a00"/>')
+                a('<path d="M7.8 16.7 L9.4 15.4 L10.8 16.7 L12 15.4 '
+                  'L13.2 16.7 L14.6 15.4 L16.2 16.7" stroke="#1a0a00" '
+                  'stroke-width="1.3" fill="none" stroke-linejoin="round" '
+                  'stroke-linecap="round"/>')
+                a('<ellipse cx="8.8" cy="9.2" rx="2.1" ry="1.3" fill="#ffb066" '
+                  'opacity=".35"/>')
+                a('</g></g></g></g>')
+                continue
+
             delay = round((order * 0.017) % 2.8, 2)
             order += 1
-            glow = ' filter="url(#glow)"' if lvl >= 3 else ''
             a(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="{RADIUS}" '
               f'fill="{LEVELS[lvl]}"{glow} class="c" '
               f'style="animation-delay:{delay}s">'
