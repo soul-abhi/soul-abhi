@@ -26,29 +26,30 @@ except ImportError:  # sample mode still works without them
 
 # ─────────────────────────────── Palette ────────────────────────────────
 BG        = "#0d1117"   # GitHub dark background
-BORDER    = "#21262d"   # card border
-TEXT_DIM  = "#6e7681"   # labels
-TEXT_MID  = "#8b949e"
-ACCENT    = "#ff6a00"   # pumpkin orange
+BORDER    = "#2b3440"   # card border (more visible)
+TEXT_DIM  = "#8b949e"   # labels
+TEXT_MID  = "#c9d1d9"
+ACCENT    = "#ff7a18"   # pumpkin orange
+# Solid, high-contrast Halloween ramp (easily distinguishable at a glance)
 LEVELS = [
-    "#161b22",  # 0 – empty cell (GitHub dark)
-    "#3d1a00",  # 1 – ember
-    "#7a3000",  # 2 – burnt orange
-    "#c74a00",  # 3 – pumpkin
-    "#ff6a00",  # 4 – blazing
+    "#1c2129",  # 0 – empty cell (clearly visible against the background)
+    "#6b2a00",  # 1 – deep ember
+    "#b83e00",  # 2 – burnt orange
+    "#f66100",  # 3 – pumpkin
+    "#ff9500",  # 4 – blazing
 ]
-GLOW = [None, None, None, "#ff7a10", "#ffa040"]
+GLOW = [None, None, None, "#ff7a10", "#ffb340"]
 
 # ─────────────────────────────── Geometry ───────────────────────────────
-CELL   = 11      # cell edge
+CELL   = 13      # cell edge (bigger = clearer)
 GAP    = 3       # gap between cells
-RADIUS = 2.5     # cell corner radius
-ROWS   = 7
+RADIUS = 3       # cell corner radius
+ROWS    = 7
 
-PAD_L  = 42      # room for day labels
-PAD_T  = 26      # room for month labels
-PAD_R  = 18
-PAD_B  = 42      # room for legend
+PAD_L  = 44      # room for day labels
+PAD_T  = 28      # room for month labels
+PAD_R  = 20
+PAD_B  = 46      # room for legend
 
 FONT   = "'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif"
 
@@ -188,7 +189,6 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
     a('<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>')
     a('</filter>')
     a('<style><![CDATA[')
-    a('@keyframes breathe {0%,100%{opacity:1}50%{opacity:.55}}')
     a('@keyframes drift {0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}')
     a('@keyframes twinkle {0%,100%{opacity:.15}50%{opacity:.7}}')
     a('@keyframes pop {0%{transform:scale(0) rotate(-25deg);opacity:0}'
@@ -197,7 +197,6 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
       '100%{transform:scale(1) rotate(0)}')
     a('@keyframes bob {0%,100%{transform:translateY(0)}50%{transform:translateY(-1.4px)}}')
     a('@keyframes flicker {0%,100%{opacity:.9}50%{opacity:1}}')
-    a('.c{animation:breathe 2.8s ease-in-out infinite}')
     a('.p{animation:drift 3.2s ease-in-out infinite}')
     a('.s{animation:twinkle 4s ease-in-out infinite}')
     a('.pop{animation:pop .75s cubic-bezier(.34,1.56,.64,1) both;'
@@ -222,17 +221,16 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
             continue
         seen.add(label)
         x = PAD_L + wi * (CELL + GAP)
-        a(f'<text x="{x}" y="16" fill="{TEXT_DIM}" font-family="{FONT}" '
-          f'font-size="10" font-weight="500">{label}</text>')
+        a(f'<text x="{x}" y="18" fill="{TEXT_DIM}" font-family="{FONT}" '
+          f'font-size="10.5" font-weight="600">{label}</text>')
 
     # ── day labels (Mon / Wed / Fri – matches GitHub) ──────────────────
     for di, name in [(1, "Mon"), (3, "Wed"), (5, "Fri")]:
-        y = PAD_T + di * (CELL + GAP) + CELL - 3
-        a(f'<text x="{PAD_L-10}" y="{y}" fill="{TEXT_DIM}" font-family="{FONT}" '
-          f'font-size="9.5" font-weight="500" text-anchor="end">{name}</text>')
+        y = PAD_T + di * (CELL + GAP) + CELL - 4
+        a(f'<text x="{PAD_L-11}" y="{y}" fill="{TEXT_DIM}" font-family="{FONT}" '
+          f'font-size="10" font-weight="600" text-anchor="end">{name}</text>')
 
     # ── cells ──────────────────────────────────────────────────────────
-    order = 0
     pump_order = 0
     for wi, wk in enumerate(weeks):
         for di, day in enumerate(wk["contributionDays"]):
@@ -250,46 +248,44 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
 
             # ── High-contribution day → jack-o'-lantern that pops in ──
             if day["date"] in pumpkin_dates:
+                # Dark rounded tile so the bright pumpkin pops with high contrast
                 a(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="{RADIUS}" '
-                  f'fill="{LEVELS[4]}" filter="url(#glow)"/>')
+                  f'fill="#2b1405"/>')
 
                 cx = x + CELL / 2
                 cy = y + CELL / 2
-                s = round(CELL * 1.12 / 24, 4)
+                s = round(CELL * 1.18 / 24, 4)
                 pop_delay = round(0.15 + (pump_order * 0.06) % 1.9, 2)
                 pump_order += 1
 
                 a(f'<g transform="translate({cx},{cy})">')
                 a(f'<g class="pop" style="animation-delay:{pop_delay}s">')
                 a(f'<g class="bob" style="animation-delay:{round(pop_delay + 0.75, 2)}s">')
-                a(f'<g class="fl" transform="scale({s}) translate(-12,-12)">')
+                a(f'<g transform="scale({s}) translate(-12,-12)">')
                 a(f'<title>{count} contributions on {day["date"]} 🎃</title>')
-                a('<circle cx="12" cy="13.5" r="11" fill="#ff6a00" opacity="0.22"/>')
-                a('<ellipse cx="12" cy="13.6" rx="9.2" ry="8.4" fill="#ff7a10"/>')
-                a('<path d="M7.4 6.8 Q5 13.6 7.4 20.4" stroke="#c74a00" '
-                  'stroke-width="1.1" fill="none" opacity=".8"/>')
-                a('<path d="M16.6 6.8 Q19 13.6 16.6 20.4" stroke="#c74a00" '
-                  'stroke-width="1.1" fill="none" opacity=".8"/>')
-                a('<path d="M12 5.2 Q12 13.6 12 22" stroke="#c74a00" '
-                  'stroke-width="1" fill="none" opacity=".55"/>')
-                a('<path d="M11.2 5.6 q0.2 -2.2 2.3 -2.6" stroke="#3f8f3a" '
-                  'stroke-width="1.8" fill="none" stroke-linecap="round"/>')
-                a('<path d="M7.4 12.3 L10.6 9.9 L10.9 13.4 Z" fill="#1a0a00"/>')
-                a('<path d="M16.6 12.3 L13.4 9.9 L13.1 13.4 Z" fill="#1a0a00"/>')
-                a('<path d="M7.8 16.7 L9.4 15.4 L10.8 16.7 L12 15.4 '
-                  'L13.2 16.7 L14.6 15.4 L16.2 16.7" stroke="#1a0a00" '
-                  'stroke-width="1.3" fill="none" stroke-linejoin="round" '
+                a('<circle cx="12" cy="13.5" r="11.5" fill="#ff7a10" opacity="0.30"/>')
+                a('<ellipse cx="12" cy="13.6" rx="9.4" ry="8.5" fill="#ff9500"/>')
+                a('<path d="M7.4 6.8 Q5 13.6 7.4 20.4" stroke="#c25a00" '
+                  'stroke-width="1.2" fill="none" opacity=".85"/>')
+                a('<path d="M16.6 6.8 Q19 13.6 16.6 20.4" stroke="#c25a00" '
+                  'stroke-width="1.2" fill="none" opacity=".85"/>')
+                a('<path d="M12 5.2 Q12 13.6 12 22" stroke="#c25a00" '
+                  'stroke-width="1.1" fill="none" opacity=".6"/>')
+                a('<path d="M11.2 5.6 q0.2 -2.2 2.3 -2.6" stroke="#4caf50" '
+                  'stroke-width="2" fill="none" stroke-linecap="round"/>')
+                a('<path d="M7.2 12.4 L10.7 9.8 L11 13.6 Z" fill="#1a0a00"/>')
+                a('<path d="M16.8 12.4 L13.3 9.8 L13 13.6 Z" fill="#1a0a00"/>')
+                a('<path d="M7.6 16.9 L9.3 15.5 L10.7 16.9 L12 15.5 '
+                  'L13.3 16.9 L14.7 15.5 L16.4 16.9" stroke="#1a0a00" '
+                  'stroke-width="1.5" fill="none" stroke-linejoin="round" '
                   'stroke-linecap="round"/>')
-                a('<ellipse cx="8.8" cy="9.2" rx="2.1" ry="1.3" fill="#ffb066" '
-                  'opacity=".35"/>')
+                a('<ellipse cx="8.6" cy="9" rx="2.2" ry="1.3" fill="#ffd08a" '
+                  'opacity=".5"/>')
                 a('</g></g></g></g>')
                 continue
 
-            delay = round((order * 0.017) % 2.8, 2)
-            order += 1
             a(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="{RADIUS}" '
-              f'fill="{LEVELS[lvl]}"{glow} class="c" '
-              f'style="animation-delay:{delay}s">'
+              f'fill="{LEVELS[lvl]}"{glow}>'
               f'<title>{count} contribution{"s" if count != 1 else ""} on {day["date"]}</title>'
               f'</rect>')
 
