@@ -301,26 +301,12 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
     a(f'<text x="{lx0 + 5*(CELL+3) + 4}" y="{legend_baseline}" fill="{TEXT_DIM}" '
       f'font-family="{FONT}" font-size="10">More</text>')
 
-    # ── total (bottom-right) with a little pumpkin ─────────────────────
+    # ── total (bottom-right) ───────────────────────────────────────────
     total_text = f"{total:,} contributions in {year}"
     tx = svg_w - PAD_R
     a(f'<text x="{tx}" y="{legend_baseline}" fill="{ACCENT}" '
       f'font-family="{FONT}" font-size="11" font-weight="600" text-anchor="end">'
       f'{total_text}</text>')
-
-    # Conservative glyph-width estimate (bold 11px, ~5.4px/char) so the
-    # pumpkin sits just left of the number with a small, consistent gap.
-    text_w = len(total_text) * 5.4
-    pxi = max(PAD_L, tx - text_w - 10)
-    a(f'<g transform="translate({pxi},{legend_baseline-4})"><g class="p">')
-    a(f'<circle r="5.4" fill="{ACCENT}" opacity="0.95"/>')
-    a(f'<path d="M0,-5.4 q1.2,-2 2.6,-1.4" stroke="#2e7d32" '
-      f'stroke-width="1.3" fill="none" stroke-linecap="round"/>')
-    a(f'<ellipse cx="-1.8" cy="-1.4" rx="1" ry="1.2" fill="{BG}"/>')
-    a(f'<ellipse cx="1.8" cy="-1.4" rx="1" ry="1.2" fill="{BG}"/>')
-    a(f'<path d="M-2.2,1.4 Q0,2.9 2.2,1.4" stroke="{BG}" '
-      f'stroke-width="1.1" fill="none" stroke-linecap="round"/>')
-    a('</g></g>')
 
     # ── faint twinkling stars ──────────────────────────────────────────
     rng = random.Random(13)
