@@ -2,221 +2,44 @@ name: Generate Halloween Contribution Graph
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Daily at 2 AM UTC
-  workflow_dispatch:  # Manual trigger
+    - cron: '0 2 * * *'   # every day at 02:00 UTC
+  workflow_dispatch:       # allow manual runs from the Actions tab
 
 permissions:
   contents: write
 
 jobs:
-  generate-graph:
+  generate:
     runs-on: ubuntu-latest
-    name: Generate Halloween Contribution Graph SVG
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          python-version: '3.12'
+          cache: pip
 
       - name: Install dependencies
-        run: |
-          pip install requests python-dateutil
+        run: pip install requests python-dateutil
 
-      - name: Generate Halloween Contribution Graph
+      - name: Render Halloween graph
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: soul-abhi
+          USERNAME: ${{ github.repository_owner }}
+        run: python scripts/generate_halloween_graph.py --username "$USERNAME" --token "$GITHUB_TOKEN" --out halloween-contribution-graph.svg
+
+      - name: Commit updated SVG
         run: |
-          python << 'EOF'
-          import requests
-          import json
-          import base64
-          from datetime import datetime, timedelta
-          from dateutil import parser
-          import os
-
-          USERNAME = os.environ['USERNAME']
-          TOKEN = os.environ['GITHUB_TOKEN']
-
-          # Fetch contribution data from GitHub GraphQL API
-          query = """
-          query($username: String!) {
-            user(login: $username) {
-              contributionsCollection {
-                contributionCalendar {
-                  totalContributions
-                  weeks {
-                    contributionDays {
-                      date
-                      contributionCount
-                      color
-                    }
-                  }
-                }
-              }
-            }
-          }
-          """
-
-          headers = {
-              'Authorization': f'bearer {TOKEN}',
-              'Content-Type': 'application/json',
-          }
-
-          response = requests.post(
-              'https://api.github.com/graphql',
-              json={'query': query, 'variables': {'username': USERNAME}},
-              headers=headers
-          )
-
-          if response.status_code != 200:
-              print(f"Error: {response.status_code} - {response.text}")
-              exit(1)
-
-          data = response.json()
-          calendar = data['data']['user']['contributionsCollection']['contributionCalendar']
-          weeks = calendar['weeks']
-
-          # Halloween color palette (forced)
-          HALLOWEEN_COLORS = {
-              0: "#0d1117",  # Level 0 - Dark background (almost black)
-              1: "#3d1a0e",  # Level 1 - Dark pumpkin
-              2: "#8b4000",  # Level 2 - Burnt orange
-              3: "#cc5500",  # Level 3 - Bright pumpkin
-              4: "#ff7518",  # Level 4 - Vibrant orange
-          }
-
-          # Alternative: More dramatic Halloween palette
-          HALLOWEEN_COLORS_DRAMATIC = {
-              0: "#000000",  # Pure black
-              1: "#1a0a00",  # Near black with orange tint
-              2: "#4d1a00",  # Dark orange-brown
-              3: "#cc4400",  # Halloween orange
-              4: "#ff6600",  # Bright pumpkin
-          }
-
-          # Use dramatic palette
-          colors = HALLOWEEN_COLORS_DRAMATIC
-
-          # Build SVG
-          # GitHub contribution graph dimensions
-          cell_size = 10
-          cell_gap = 2
-          week_count = len(weeks)
-          svg_width = week_count * (cell_size + cell_gap) + cell_gap
-          svg_height = 7 * (cell_size + cell_gap) + cell_gap + 20  # +20 for labels
-
-          svg_parts = []
-          svg_parts.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{svg_width}" height="{svg_height}" viewBox="0 0 {svg_width} {svg_height}">')
-          svg_parts.append('<rect width="100%" height="100%" fill="#0d1117"/>')  # Dark background
-
-          # Month labels (top)
-          month_positions = {}
-          for week_idx, week in enumerate(weeks):
-              first_day = week['contributionDays'][0]
-              date_obj = parser.parse(first_day['date'])
-              month_key = date_obj.strftime('%b')
-              x = week_idx * (cell_size + cell_gap) + cell_gap
-              if month_key not in month_positions:
-                  month_positions[month_key] = x
-
-          for month, x in month_positions.items():
-              svg_parts.append(f'<text x="{x}" y="12" fill="#8b949e" font-family="system-ui, sans-serif" font-size="8" text-anchor="start">{month}</text>')
-
-          # Day labels (left) - Sun, Tue, Thu, Sat
-          day_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-          for day_idx, day in enumerate(day_labels):
-              if day_idx % 2 == 0:  # Show every other day
-                  y = day_idx * (cell_size + cell_gap) + cell_gap + 20
-                  svg_parts.append(f'<text x="0" y="{y + 7}" fill="#8b949e" font-family="system-ui, sans-serif" font-size="8" text-anchor="end" dx="-2">{day}</text>')
-
-          # Contribution cells
-          for week_idx, week in enumerate(weeks):
-              for day_idx, day in enumerate(week['contributionDays']):
-                  count = day['contributionCount']
-                  date = day['date']
-
-                  # Determine level (0-4) based on count
-                  if count == 0:
-                      level = 0
-                  elif count <= 3:
-                      level = 1
-                  elif count <= 6:
-                      level = 2
-                  elif count <= 10:
-                      level = 3
-                  else:
-                      level = 4
-
-                  fill_color = colors[level]
-
-                  x = week_idx * (cell_size + cell_gap) + cell_gap
-                  y = day_idx * (cell_size + cell_gap) + cell_gap + 20
-
-                  # Add subtle glow animation for days with contributions
-                  if level > 0:
-                      svg_parts.append(f'''
-                      <rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" rx="2" fill="{fill_color}">
-                        <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite" begin="{week_idx * 0.05 + day_idx * 0.02}s"/>
-                      </rect>''')
-                  else:
-                      svg_parts.append(f'<rect x="{x}" y="{y}" width="{cell_size}" height="{cell_size}" rx="2" fill="{fill_color}"/>')
-
-          # Legend
-          legend_y = svg_height - 18
-          svg_parts.append(f'<text x="0" y="{legend_y}" fill="#8b949e" font-family="system-ui, sans-serif" font-size="8">Less</text>')
-          for i in range(5):
-              lx = 35 + i * 14
-              svg_parts.append(f'<rect x="{lx}" y="{legend_y - 8}" width="10" height="10" rx="2" fill="{colors[i]}"/>')
-          svg_parts.append(f'<text x="{35 + 5 * 14 + 5}" y="{legend_y}" fill="#8b949e" font-family="system-ui, sans-serif" font-size="8">More</text>')
-
-          # Total contributions badge
-          total = calendar['totalContributions']
-          svg_parts.append(f'''
-          <text x="{svg_width - 5}" y="{legend_y}" fill="#ff6600" font-family="system-ui, sans-serif" font-size="9" font-weight="bold" text-anchor="end">
-            {total} contributions in {datetime.now().year}
-          </text>''')
-
-          # Halloween decorative elements - floating pumpkins
-          import random
-          random.seed(42)  # Consistent positions
-          for _ in range(8):
-              px = random.randint(10, svg_width - 20)
-              py = random.randint(15, svg_height - 30)
-              delay = random.uniform(0, 3)
-              svg_parts.append(f'''
-              <g transform="translate({px}, {py}) scale(0.3)">
-                <circle r="15" fill="#ff6600">
-                  <animateTransform attributeName="transform" type="translate" values="0,0; 0,-3; 0,0" dur="2s" repeatCount="indefinite" begin="{delay}s"/>
-                </circle>
-                <ellipse cx="-4" cy="-3" rx="2" ry="2" fill="#000"/>
-                <ellipse cx="4" cy="-3" rx="2" ry="2" fill="#000"/>
-                <path d="M-5,2 Q0,5 5,2" stroke="#000" stroke-width="1.5" fill="none"/>
-              </g>''')
-
-          svg_parts.append('</svg>')
-
-          svg_content = '\n'.join(svg_parts)
-
-          # Write SVG file
-          with open('halloween-contribution-graph.svg', 'w') as f:
-              f.write(svg_content)
-
-          print(f"Generated Halloween contribution graph: {svg_width}x{svg_height}")
-          print(f"Total contributions: {total}")
-          EOF
-
-      - name: Commit and push SVG
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add halloween-contribution-graph.svg
-          git diff --staged --quiet || git commit -m "🎃 Update Halloween contribution graph"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update Halloween contribution graph 🎃"
+            git push
+          fi
