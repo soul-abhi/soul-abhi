@@ -262,7 +262,7 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
                 a(f'<g class="pop" style="animation-delay:{pop_delay}s">')
                 a(f'<g class="bob" style="animation-delay:{round(pop_delay + 0.75, 2)}s">')
                 a(f'<g transform="scale({s}) translate(-12,-12)">')
-                a(f'<title>{count} contributions on {day["date"]} 🎃</title>')
+                a(f'<title>{count} contributions on {day["date"]}</title>')
                 a('<circle cx="12" cy="13.5" r="11.5" fill="#ff7a10" opacity="0.30"/>')
                 a('<ellipse cx="12" cy="13.6" rx="9.4" ry="8.5" fill="#ff9500"/>')
                 a('<path d="M7.4 6.8 Q5 13.6 7.4 20.4" stroke="#c25a00" '
@@ -302,7 +302,7 @@ def build_svg(weeks, total: int, username: str = "you", year: int | None = None)
       f'font-family="{FONT}" font-size="10">More</text>')
 
     # ── total (bottom-right) ───────────────────────────────────────────
-    total_text = f"{total:,} contributions in {year}"
+    total_text = f"Total Contribution : {total:,} in {year}"
     tx = svg_w - PAD_R
     a(f'<text x="{tx}" y="{legend_baseline}" fill="{ACCENT}" '
       f'font-family="{FONT}" font-size="11" font-weight="600" text-anchor="end">'
